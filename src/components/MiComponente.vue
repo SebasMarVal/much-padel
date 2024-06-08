@@ -52,7 +52,17 @@
         </a>
       </div>
       <!-- Fin del carrusel de Bootstrap -->
-    
+      <p class="about-us">
+       <strong>Quiees somos ?</strong> 
+  <br><br>
+  Somos un grupo de amigos apasionados por el deporte y la innovación. <br>
+  Nuestra historia comenzó en una cancha, compartiendo risas, esfuerzo y, sobre todo, pasión por el deporte.
+  Nos embarcamos en esta aventura con el objetivo de combinar comodidad, funcionalidad y estilo. Buscamos los mejores materiales, aquellos que nos permitieran crear una prenda de vestir que fuera suave al tacto, absorbente y duradera.
+  Hoy, estamos orgullosos de ofrecer nuestras camisetas con mangas de textura toalla. Son el resultado de muchas horas de trabajo, pruebas y, sobre todo, la ilusión de un grupo de amigos que querían aportar algo nuevo al mundo del deporte.
+  Esperamos que disfrutes de nuestras camisetas tanto como nosotros disfrutamos creándolas.
+</p>
+
+      <img class="d-block w-50 center-frame" src="@/assets/salto.jpg" alt="imagen">
       <div class="buttons">
         <button @click="goToRegister" class="btn btn-primary">{{ $t('message.register') }}</button>
         <button @click="goToLogin" class="btn btn-secondary">{{ $t('message.login') }}</button>
@@ -120,6 +130,7 @@ export default {
   height: auto; /* Mantener la proporción de la imagen */
 }
 .buttons {
+  margin-top: 50px;
   margin-bottom: 50px; /* Espacio entre la imagen y los botones */
 }
 .btn-primary {
@@ -170,6 +181,19 @@ export default {
   margin: 5px;
   padding: 5px 10px;
   font-size: 0.8rem;
+}
+.center-frame {
+  display: block;
+  margin-left: auto;
+  margin-right: auto;
+  width: 50%;
+  border: 5px solid #6e6d6d;
+}
+.about-us {
+  font-family:'Gill Sans', 'Gill Sans MT', Calibri, 'Trebuchet MS', sans-serif;
+  text-align: justify;
+  background-color: #ade9c7; /* Este es un color azul claro */
+  padding: 20px; /* Añade algo de espacio alrededor del texto */
 }
 </style>
 
