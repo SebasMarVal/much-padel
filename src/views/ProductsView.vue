@@ -1,7 +1,7 @@
 
 <template>
   <div class="login-container">
-    <h2 class="title">Productos</h2>
+    <h2 class="title">Productoss</h2>
     <div class="product-grid">
       <div v-for="product in products" :key="product.id" class="product-card">
         <img :src="getImage(product.imagen)" :alt="product.nombre" class="product-image">
