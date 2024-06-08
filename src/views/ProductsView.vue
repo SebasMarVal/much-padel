@@ -24,7 +24,7 @@ import axios from 'axios';
 import 'bootstrap-icons/font/bootstrap-icons.css';
 
 export default {
-  name: 'AdminView',
+  name: 'ProductsView',
   data() {
     return {
       name: '',
