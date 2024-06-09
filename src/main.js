@@ -9,12 +9,18 @@ import i18n from './i18n';
 
 // Crear una instancia de Axios con configuración global
 const axiosInstance = axios.create({
-  baseURL: 'http://localhost/mi_proyecto/',  // Ajusta la URL base según sea necesario
+ // baseURL: 'http://localhost/mi_proyecto/',  // Ajusta la URL base según sea necesario
+ baseURL : 'https://much-padel.vercel.app/#/', // Reemplaza con la URL de tu servidor
 });
   
   // Crear la aplicación
   const app = createApp(App);
-  
+
+  // Configurar Axios para incluir cabeceras CORS en todas las solicitudes
+
+  axiosInstance.defaults.headers.common['Access-Control-Allow-Origin'] = '*';
+  axiosInstance.defaults.headers.common['Access-Control-Allow-Methods'] = 'POST, GET, OPTIONS';
+  axiosInstance.defaults.headers.common['Access-Control-Allow-Headers'] = 'Content-Type';
   // Agregar Axios a la instancia de la aplicación
   app.config.globalProperties.$http = axiosInstance
   
