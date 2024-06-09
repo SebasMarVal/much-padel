@@ -9,8 +9,8 @@ import i18n from './i18n';
 
 // Crear una instancia de Axios con configuración global
 const axiosInstance = axios.create({
- // baseURL: 'http://localhost/mi_proyecto/',  // Ajusta la URL base según sea necesario
- baseURL : 'https://much-padel.vercel.app/#/', // Reemplaza con la URL de tu servidor
+ baseURL: 'http://localhost/mi_proyecto/',  // Ajusta la URL base según sea necesario
+ //baseURL : 'https://much-padel.vercel.app/#/', // Reemplaza con la URL de tu servidor
 });
   
   // Crear la aplicación
