@@ -1,4 +1,5 @@
 <template>
+  <CookieNotice v-if="!cookiesAccepted" @accept="cookiesAccepted = true" />
     <footer class="footer-content">
       <div class="footer-container">
         <div class="footer-section">
@@ -26,14 +27,27 @@
         </a>
       </div>
         </div>
+        
       </div>
+
     </footer>
   </template>
   
   <script>
+  import CookieNotice from './CookieNotice.vue';
+
   export default {
-      name: 'FooterView'
+      name: 'FooterView',
+      components: {
+    CookieNotice
+  },
+  data() {
+    return {
+      cookiesAccepted: localStorage.getItem('cookiesAccepted') === 'true'
+    }
   }
+  }
+  
   </script>
   
   <style scoped>

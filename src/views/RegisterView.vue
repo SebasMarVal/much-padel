@@ -15,13 +15,13 @@
         <input type="password" id="password" v-model="password" required>
       </div>
       <div class="form-actions">
-        <button type="submit" class="btn btn-primary">Registrarse</button>
-        <button @click="goToHome" class="btn btn-secondary">Home</button>
+        <button type="submit" class="btn btn-primary" :disabled="isRegistering">Registrarse</button>
+        <button @click="goToHome" class="btn btn-secondary" :disabled="isRegistering">Home</button>
       </div>
     </form>
   </div>
 </template>
-  
+
   <script>
   /* eslint-disable */ 
   import axios from 'axios';
@@ -31,7 +31,8 @@
     return {
       nombre: '',
       email: '',
-      password: ''
+      password: '',
+      isRegistering: false // Propiedad para controlar el estado de registro
     };
   },
   methods: {
@@ -58,7 +59,7 @@
     password: this.password
   };
 
-  this.$http.post('register.php', userData)
+  axios.post('http://localhost/mi_proyecto/register.php', userData)
     .then(response => {
       // Reactivar el botón de registro y ocultar spinner
       this.isRegistering = false;
