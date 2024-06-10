@@ -4,11 +4,11 @@
     <form @submit.prevent="login" class="login-form">
       <div class="form-group">
         <label for="email">Email:</label>
-        <input type="email" id="email" v-model="email" required>
+        <input type="email" id="email" v-model="email" required />
       </div>
       <div class="form-group">
         <label for="password">Contraseña:</label>
-        <input type="password" id="password" v-model="password" required>
+        <input type="password" id="password" v-model="password" required />
       </div>
       <div class="form-actions">
         <button type="submit" class="btn btn-primary">Inicio</button>
@@ -20,52 +20,55 @@
 </template>
 
 <script>
-import axios from 'axios';
+import axios from "axios";
 
 export default {
-  name: 'LoginView',
+  name: "LoginView",
   data() {
     return {
-      email: '',
-      password: '',
-      message: ''
+      email: "",
+      password: "",
+      message: "",
     };
   },
   methods: {
     goToHome() {
-      this.$router.push({ name: 'home' });
+      this.$router.push({ name: "home" });
     },
     async login() {
       try {
-        const response = await axios.post('http://localhost/mi_proyecto/login.php', {
-          email: this.email,
-          password: this.password
-        });
+        const response = await axios.post(
+          "http://localhost/mi_proyecto/login.php",
+          {
+            email: this.email,
+            password: this.password,
+          }
+        );
 
-        console.log('Respuesta del servidor:', response);
+        console.log("Respuesta del servidor:", response);
 
         if (response.data.success) {
-          localStorage.setItem('token', response.data.token);
-          localStorage.setItem('user', JSON.stringify(response.data.user));
+          localStorage.setItem("token", response.data.token);
+          localStorage.setItem("user", JSON.stringify(response.data.user));
           this.message = response.data.message;
 
           setTimeout(() => {
             const user = response.data.user;
-            console.log('Usuario autenticado:', user);
+            console.log("Usuario autenticado:", user);
             if (user.roles_id === 1) {
-              this.$router.push({ name: 'admin' });
+              this.$router.push({ name: "admin" });
             } else {
-              this.$router.push({ name: 'products' });
+              this.$router.push({ name: "products" });
             }
           }, 1000);
         } else {
           this.message = response.data.error;
         }
       } catch (error) {
-        this.message = 'Error en el inicio de sesión: ' + error.message;
+        this.message = "Error en el inicio de sesión: " + error.message;
       }
-    }
-  }
+    },
+  },
 };
 </script>
 <style scoped>
@@ -127,6 +130,3 @@ export default {
   color: red;
 }
 </style>
-
-
-  

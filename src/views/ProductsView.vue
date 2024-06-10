@@ -1,15 +1,18 @@
-
 <template>
   <div class="login-container">
     <h2 class="title">Productoss</h2>
     <div class="product-grid">
       <div v-for="product in products" :key="product.id" class="product-card">
-        <img :src="getImage(product.imagen)" :alt="product.nombre" class="product-image">
+        <img
+          :src="getImage(product.imagen)"
+          :alt="product.nombre"
+          class="product-image"
+        />
         <div>{{ product.nombre }}</div>
         <div>Precio: {{ product.precio }} €</div>
         <div>Stock: {{ product.stock }}</div>
         <button @click="buyProduct(product)" class="btn btn-primary">
-        <i class="bi bi-cart-fill"></i> Buy
+          <i class="bi bi-cart-fill"></i> Buy
         </button>
       </div>
     </div>
@@ -18,22 +21,21 @@
   </div>
 </template>
 
-
 <script>
-import axios from 'axios';
-import 'bootstrap-icons/font/bootstrap-icons.css';
+import axios from "axios";
+import "bootstrap-icons/font/bootstrap-icons.css";
 
 export default {
-  name: 'ProductsView',
+  name: "ProductsView",
   data() {
     return {
-      name: '',
-      description: '',
+      name: "",
+      description: "",
       price: 0,
       stock: 0,
-      image: '',
+      image: "",
       products: [],
-      isAdmin: false
+      isAdmin: false,
     };
   },
   created() {
@@ -42,25 +44,26 @@ export default {
   },
   methods: {
     checkAdminRole() {
-      const user = JSON.parse(localStorage.getItem('user'));
+      const user = JSON.parse(localStorage.getItem("user"));
       this.isAdmin = user && user.roles_id === 1;
       if (!this.isAdmin) {
-        console.log('Esta llegando');
-        this.$router.push({ name: 'products' });
+        //console.log('Esta llegando');
+        this.$router.push({ name: "products" });
       }
     },
     fetchProducts() {
-      axios.get('http://localhost/mi_proyecto/get_products.php')
-        .then(response => {
+      axios
+        .get("http://localhost/mi_proyecto/get_products.php")
+        .then((response) => {
           this.products = response.data;
         })
-        .catch(error => {
+        .catch((error) => {
           console.error(error);
         });
     },
     buyProduct(product) {
       const talla = prompt("Ingrese la talla que desea comprar (S, M, L, XL):");
-      if (!['S', 'M', 'L', 'XL'].includes(talla.toUpperCase())) {
+      if (!["S", "M", "L", "XL"].includes(talla.toUpperCase())) {
         alert("Debe ingresar una talla válida (S, M, L, XL).");
         return;
       }
@@ -68,68 +71,65 @@ export default {
         alert("No hay suficiente stock disponible.");
         return;
       }
-      // Enviar el correo electrónico
+
       this.sendPurchaseEmail(product, talla);
       // Resta el stock
       this.updateStock(product.id, product.stock - 1);
     },
+    // Enviar el correo electrónico
     sendPurchaseEmail(product, talla) {
-    axios.post('http://localhost/mi_proyecto/send_email.php', {
-    product: product,
-    talla: talla,
-    email: '1595287@iesplayamar.es' // Reemplazar con el correo electrónico del destinatario
-  })
-  .then(() => {
-    alert("Se ha enviado un correo con los detalles de su compra.");
-  })
-  .catch(error => {
-    console.error(error);
-  });
-},
+      axios
+        .post("http://localhost/mi_proyecto/send_email.php", {
+          product: product,
+          talla: talla,
+          email: "1595287@iesplayamar.es", // Reemplazar con el correo electrónico del destinatario
+        })
+        .then(() => {
+          alert("Se ha enviado un correo con los detalles de su compra.");
+        })
+        .catch((error) => {
+          console.error(error);
+        });
+    },
+    // Resta el stock
     updateStock(id, newStock) {
-   // Aseguro de que newStock sea un número
-    newStock = Number(newStock);
-    console.log(`Updating stock for product ${id} to ${newStock}`);
-    axios.post('http://localhost/mi_proyecto/update_stock.php', {
-      id: id,
-      stock: newStock
-    })
-    .then(() => {
-      // Espera a que se complete la actualización del stock antes de volver a buscar los productos
-      return this.fetchProducts();
-    })
-    .catch(error => {
-      console.error(error);
-    });
-},
+      // Aseguro de que newStock sea un número
+      newStock = Number(newStock);
+      console.log(`Updating stock for product ${id} to ${newStock}`);
+      axios
+        .post("http://localhost/mi_proyecto/update_stock.php", {
+          id: id,
+          stock: newStock,
+        })
+        .then(() => {
+          // Espera a que se complete la actualización del stock antes de volver a buscar los productos
+          return this.fetchProducts();
+        })
+        .catch((error) => {
+          console.error(error);
+        });
+    },
     goToHome() {
-      this.$router.push({ name: 'home' });
+      this.$router.push({ name: "home" });
     },
     getImage(imageName) {
-        if (!imageName) {
-            return require('@/assets/bola3.avif'); // Imagen por defecto
-        }
-        return require(`@/assets/${imageName}`);
-    },
-    resetForm() {
-      this.name = '';
-      this.description = '';
-      this.price = 0;
-      this.stock = 0;
-      this.image = '';
+      if (!imageName) {
+        return require("@/assets/bola3.avif"); // Imagen por defecto
+      }
+      return require(`@/assets/${imageName}`);
     },
     logout() {
-      localStorage.removeItem('token');
-      localStorage.removeItem('user');
-      this.$router.push({ name: 'home' });
-    }
-  }
+      localStorage.removeItem("token");
+      localStorage.removeItem("user");
+      this.$router.push({ name: "home" });
+    },
+  },
 };
 </script>
 
 <style scoped>
 .title {
-  font-family: Georgia, 'Times New Roman', Times, serif;
+  font-family: Georgia, "Times New Roman", Times, serif;
   background-color: #2489f5; /* Azul */
   color: white;
   padding: 10px;
@@ -143,7 +143,9 @@ export default {
 }
 
 .product-card {
-  width: calc(33.33% - 10px); /* Ajusta esto según el espacio que quieras entre las columnas */
+  width: calc(
+    33.33% - 10px
+  ); /* Ajusta esto según el espacio que quieras entre las columnas */
   margin-bottom: 20px;
 }
 

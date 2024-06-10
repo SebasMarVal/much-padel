@@ -1,19 +1,23 @@
 <template>
-  <div id="app">
+  <div id="app" class="d-flex flex-column min-vh-100">
     <HeaderView />
 
-    <div class="content">
+    <div
+      class="content flex-grow-1 d-flex align-items-center justify-content-center"
+    >
       <router-view></router-view>
     </div>
-    <FooterView/>
 
+    <FooterView />
   </div>
 </template>
 
 <script>
 /* eslint-disable no-unused-vars */
-import HeaderView from './components/HeaderView.vue';
-import FooterView from './components/FooterView.vue';
+import HeaderView from "./components/HeaderView.vue";
+import FooterView from "./components/FooterView.vue";
+import "bootstrap/dist/css/bootstrap.min.css";
+import "bootstrap/dist/js/bootstrap.bundle.min.js";
 
 export default {
   components: {
@@ -23,28 +27,28 @@ export default {
   methods: {
     changeLanguage(lang) {
       this.$i18n.locale = lang;
-    }
-  }
+    },
+  },
 };
 </script>
 
 <style>
 #app {
   background-color: ffffff;
-  font-family: 'Segoe UI', Tahoma, Geneva, Verdana, sans-serif;
+  font-family: "Segoe UI", Tahoma, Geneva, Verdana, sans-serif;
   -webkit-font-smoothing: antialiased;
   -moz-osx-font-smoothing: grayscale;
   text-align: center;
   color: #2c3e50;
   display: flex;
   flex-direction: column;
-  min-height: 100vh;
 }
 .content {
   flex: 1;
   display: flex;
   align-items: center;
   justify-content: center;
+  padding: 20px;
 }
 
 nav {

@@ -1,105 +1,80 @@
 <template>
   <CookieNotice v-if="!cookiesAccepted" @accept="cookiesAccepted = true" />
-    <footer class="footer-content">
-      <div class="footer-container">
-        <div class="footer-section">
+  <footer class="footer-content">
+    <div class="container py-4">
+      <div class="row text-center text-md-left">
+        <div class="col-12 col-md-3 mb-3">
           <h5>Contacto</h5>
-          <p>muchpadel@tunegocio.com</p>
+          <p>muchpadel@negocio.com</p>
           <p>Teléfono: +34 123 456 789</p>
         </div>
-        <div class="footer-section">
+        <div class="col-12 col-md-3 mb-3">
           <h5>Ubicación</h5>
           <p>Calle Falsa 123</p>
           <p>04004 Málaga, Andalucía, España</p>
         </div>
-        <div class="footer-section">
+        <div class="col-12 col-md-3 mb-3">
           <h5>CIF Empresa</h5>
           <p>B12345678</p>
         </div>
-        <div class="footer-section">
+        <div class="col-12 col-md-3 mb-3">
           <h5>Redes Sociales</h5>
-          <div class="social-links">
-        <a href="tu-enlace-facebook" class="social-link">
-          <img src="@/assets/face.png" alt="Facebook" class="social-icon"> Facebook
-        </a>
-        <a href="tu-enlace-instagram" class="social-link">
-          <img src="@/assets/Insta.png" alt="Instagram" class="social-icon"> Instagram
-        </a>
-      </div>
+          <div class="d-flex flex-column align-items-center">
+            <a href="tu-enlace-facebook" class="social-link mb-2">
+              <img src="@/assets/face.png" alt="Facebook" class="social-icon" />
+              Facebook
+            </a>
+            <a href="tu-enlace-instagram" class="social-link">
+              <img
+                src="@/assets/Insta.png"
+                alt="Instagram"
+                class="social-icon"
+              />
+              Instagram
+            </a>
+          </div>
         </div>
-        
       </div>
+      <p>By Sebastián Martínez Valdearcos</p>
+    </div>
+  </footer>
+</template>
 
-    </footer>
-  </template>
-  
-  <script>
-  import CookieNotice from './CookieNotice.vue';
+<script>
+import CookieNotice from "./CookieNotice.vue";
 
-  export default {
-      name: 'FooterView',
-      components: {
-    CookieNotice
+export default {
+  name: "FooterView",
+  components: {
+    CookieNotice,
   },
   data() {
     return {
-      cookiesAccepted: localStorage.getItem('cookiesAccepted') === 'true'
-    }
-  }
-  }
-  
-  </script>
-  
-  <style scoped>
- .footer-content {
-    background-color: #2489f5; /* Azul */
-    color: white;
-    padding: 4px;
-    text-align: center;
-}
+      cookiesAccepted: localStorage.getItem("cookiesAccepted") === "true",
+    };
+  },
+};
+</script>
 
-.footer-container {
-    display: flex;
-    justify-content: space-around;
-    margin: 0;
-}
-
-.footer-section {
-    margin-bottom: 2px;
-    flex-basis: 14%; /* Ajusta el ancho de cada columna */
-}
-
-.footer h4 {
-    font-size: 1rem; /* Tamaño más pequeño para los h4 */
-    margin-bottom: 5px;
-}
-
-.footer p, .footer a {
-    font-size: 0.8rem; /* Tamaño más pequeño para el texto */
-    margin: 2px 0;
-   
-}
-
-  .footer a:hover {
-      text-decoration: underline;
-  }
-  .social-links {
-    display: flex;
-    flex-direction: column;
-    align-items: center;
+<style scoped>
+.footer-content {
+  background-color: #2489f5; /* Azul */
+  color: white;
+  text-align: center;
 }
 
 .social-link {
-    color: white;
-    text-decoration: none;
-    margin-bottom: 6px; /* Espacio entre enlaces */
+  color: white;
+  text-decoration: none;
 }
 
 .social-icon {
-    width: 24px; /* o el tamaño que prefieras */
-    height: auto;
-    margin-left: 5px; /* Espacio entre el texto y el logotipo */
+  width: 24px; /* o el tamaño que prefieras */
+  height: auto;
+  margin-left: 5px; /* Espacio entre el texto y el logotipo */
 }
-  </style>
-  
-  
+
+.social-link:hover {
+  text-decoration: underline;
+}
+</style>

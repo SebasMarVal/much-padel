@@ -4,83 +4,94 @@
     <form @submit.prevent="register" class="register-form">
       <div class="form-field">
         <label for="nombre">Nombre Completo:</label>
-        <input type="text" id="nombre" v-model="nombre" required>
+        <input type="text" id="nombre" v-model="nombre" required />
       </div>
       <div class="form-field">
         <label for="email">Email:</label>
-        <input type="email" id="email" v-model="email" required>
+        <input type="email" id="email" v-model="email" required />
       </div>
       <div class="form-field">
         <label for="password">Contraseña:</label>
-        <input type="password" id="password" v-model="password" required>
+        <input type="password" id="password" v-model="password" required />
       </div>
       <div class="form-actions">
-        <button type="submit" class="btn btn-primary" :disabled="isRegistering">Registrarse</button>
-        <button @click="goToHome" class="btn btn-secondary" :disabled="isRegistering">Home</button>
+        <button type="submit" class="btn btn-primary" :disabled="isRegistering">
+          Registrarse
+        </button>
+        <button
+          @click="goToHome"
+          class="btn btn-secondary"
+          :disabled="isRegistering"
+        >
+          Home
+        </button>
       </div>
     </form>
   </div>
 </template>
 
-  <script>
-  /* eslint-disable */ 
-  import axios from 'axios';
-  export default {
-    name: 'RegisterView',
+<script>
+/* eslint-disable */
+import axios from "axios";
+export default {
+  name: "RegisterView",
   data() {
     return {
-      nombre: '',
-      email: '',
-      password: '',
-      isRegistering: false // Propiedad para controlar el estado de registro
+      nombre: "",
+      email: "",
+      password: "",
+      isRegistering: false, // Propiedad para controlar el estado de registro
     };
   },
   methods: {
     goToHome() {
-      this.$router.push({ name: 'home' });
+      this.$router.push({ name: "home" });
     },
     register() {
-  // Validación de datos 
-  if (!this.email.includes('@')) {
-    alert('Por favor, introduce un email válido.');
-    return;
-  }
-  if (this.password.length < 4) {
-    alert('La contraseña debe tener al menos 4 caracteres.');
-    return;
-  }
-
-  // Desactivar el botón de registro y mostrar spinner (no mostrado aquí)
-  this.isRegistering = true;
-
-  const userData = {
-    nombre: this.nombre,
-    email: this.email,
-    password: this.password
-  };
-
-  axios.post('http://localhost/mi_proyecto/register.php', userData)
-    .then(response => {
-      // Reactivar el botón de registro y ocultar spinner
-      this.isRegistering = false;
-
-      if (response.data.success) {
-        alert('Registro exitoso');
-        this.$router.push('/login');
-      } else {
-        alert('Error en el registro: ' + response.data.error);
+      // Validación de datos
+      if (!this.email.includes("@")) {
+        alert("Por favor, introduce un email válido.");
+        return;
       }
-    })
-    .catch(error => {
-      // Reactivar el botón de registro y ocultar spinner
-      this.isRegistering = false;
-      alert('Ha ocurrido un error durante el registro. Por favor, inténtalo de nuevo.');
-      console.error('Error:', error);
-    });
-    }
-  }
+      if (this.password.length < 4) {
+        alert("La contraseña debe tener al menos 4 caracteres.");
+        return;
+      }
+
+      // Desactivar el botón de registro y mostrar spinner (no mostrado aquí)
+      this.isRegistering = true;
+
+      const userData = {
+        nombre: this.nombre,
+        email: this.email,
+        password: this.password,
+      };
+
+      axios
+        .post("http://localhost/mi_proyecto/register.php", userData)
+        .then((response) => {
+          // Reactivar el botón de registro y ocultar spinner
+          this.isRegistering = false;
+
+          if (response.data.success) {
+            alert("Registro exitoso");
+            this.$router.push("/login");
+          } else {
+            alert("Error en el registro: " + response.data.error);
+          }
+        })
+        .catch((error) => {
+          // Reactivar el botón de registro y ocultar spinner
+          this.isRegistering = false;
+          alert(
+            "Ha ocurrido un error durante el registro. Por favor, inténtalo de nuevo."
+          );
+          console.error("Error:", error);
+        });
+    },
+  },
 };
-  </script>
+</script>
 <style scoped>
 .register-container {
   max-width: 400px;
